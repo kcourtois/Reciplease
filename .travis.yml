@@ -4,6 +4,6 @@ install:
   - ./install_swiftlint.sh
 script:
   - swiftlint
-  - xcodebuild -scheme Reciplease -project Reciplease.xcodeproj -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.2' build test -quiet
+  - xcodebuild -scheme Reciplease -project Reciplease.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.2' build test -quiet
 after_success:
   - bash <(curl -s https://codecov.io/bash)

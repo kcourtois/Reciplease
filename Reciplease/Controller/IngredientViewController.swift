@@ -8,9 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class IngredientViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let rserv = RecipeService()
+        rserv.search(searchText: "chicken") { (_, _) in
+            //
+        }
     }
 }
