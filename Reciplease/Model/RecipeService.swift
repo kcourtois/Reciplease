@@ -26,6 +26,7 @@ class RecipeService {
         AF.request(urlToSearch).responseJSON { response in
             guard let data = response.data, let json = try? JSON(data: data) else {
                 completionHandler(nil, .failure)
+                print("fail")
                 return
             }
 

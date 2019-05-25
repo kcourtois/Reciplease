@@ -139,6 +139,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="searchRecipes" destination="HaQ-Kp-bAJ" eventType="touchUpInside" id="Gd1-MA-Z1W"/>
                                     <segue destination="LHc-N5-gew" kind="show" identifier="segueToListRecipe" id="ufW-1B-p7w"/>
                                 </connections>
                             </button>
@@ -151,19 +152,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Lemon, Cheese, Sausages..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="geE-Ng-vre">
-                                        <rect key="frame" x="16" y="58" width="221" height="21"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lemon, Cheese, Sausages..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="geE-Ng-vre">
+                                        <rect key="frame" x="16" y="58" width="220.5" height="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zl-s1-Z8V">
-                                        <rect key="frame" x="245" y="52" width="59" height="33"/>
+                                        <rect key="frame" x="244.5" y="52" width="59.5" height="33"/>
                                         <color key="backgroundColor" red="0.34901960780000002" green="0.57254901960000004" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title=" Add ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addIngredient" destination="HaQ-Kp-bAJ" eventType="touchUpInside" id="eos-hP-Fl5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -179,7 +183,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your ingredients :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfN-uj-1C4">
-                                <rect key="frame" x="16" y="140" width="221" height="21"/>
+                                <rect key="frame" x="16" y="140" width="220.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -207,14 +211,20 @@
                                         <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="HaQ-Kp-bAJ" id="IR8-Tw-8yL"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuA-HM-vtT">
-                                <rect key="frame" x="245" y="134" width="59" height="33"/>
+                                <rect key="frame" x="244.5" y="134" width="59.5" height="33"/>
                                 <color key="backgroundColor" red="0.34901960780000002" green="0.57254901960000004" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Clear">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="clearIngredients" destination="HaQ-Kp-bAJ" eventType="touchUpInside" id="TxC-KG-DpS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -241,6 +251,10 @@
                     <navigationItem key="navigationItem" title="Reciplease" id="du1-ps-HCZ">
                         <barButtonItem key="backBarButtonItem" title="Back" id="qsS-bu-Mfh"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="u9E-DT-hFd" id="eyG-0k-7Cr"/>
+                        <outlet property="textField" destination="geE-Ng-vre" id="t2x-YE-eBA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gC-MP-nD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
