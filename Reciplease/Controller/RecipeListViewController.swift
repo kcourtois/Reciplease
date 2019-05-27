@@ -15,7 +15,7 @@ class RecipeListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "RecipeResume", bundle: nil), forCellReuseIdentifier: "RecipesCell")
+        //tableView.register(UINib(nibName: "RecipeResume", bundle: nil), forCellReuseIdentifier: "RecipeCell")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,7 +40,7 @@ extension RecipeListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
             as? RecipeTableViewCell else {
                 return UITableViewCell()
         }

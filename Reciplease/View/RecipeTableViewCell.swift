@@ -9,17 +9,14 @@
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
-    @IBOutlet weak var imageRecipe: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var servings: UILabel!
-    @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var subtitle: UILabel!
+
+    @IBOutlet weak var recipeResume: RecipeResume!
 
     func configure(recipe: Recipe) {
-        imageRecipe.image = recipe.image
-        title.text = recipe.name.capitalized
-        servings.text = "\(recipe.servings)"
-        time.text = "\(recipe.time) m"
+        recipeResume.imageView.image = recipe.image
+        recipeResume.title.text = recipe.name.capitalized
+        recipeResume.servings.text = "\(recipe.servings)"
+        recipeResume.time.text = "\(recipe.time) m"
         var ingredientsLabel = ""
         for (index, ingr) in recipe.ingredients.enumerated() {
             if index == recipe.ingredients.count-1 {
@@ -28,6 +25,6 @@ class RecipeTableViewCell: UITableViewCell {
                 ingredientsLabel += "\(ingr), "
             }
         }
-        subtitle.text = "\(ingredientsLabel)"
+        recipeResume.subtitle.text = "\(ingredientsLabel)"
     }
 }
