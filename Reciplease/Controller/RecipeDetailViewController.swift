@@ -10,10 +10,13 @@ import UIKit
 
 class RecipeDetailViewController: UIViewController {
 
+    var recipe: Recipe?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let favorite = UIBarButtonItem(image: #imageLiteral(resourceName: "whitestar"), style: .plain, target: self, action: #selector(favoriteTapped))
         navigationItem.rightBarButtonItem = favorite
+        print(recipe)
     }
 
     @objc func favoriteTapped() {

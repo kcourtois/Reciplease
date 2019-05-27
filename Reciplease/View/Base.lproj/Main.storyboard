@@ -35,19 +35,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EjA-aG-qdo">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EjA-aG-qdo">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="120" id="lEe-Sh-lkz">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="120" id="lEe-Sh-lkz" customClass="RecipeTableViewCell" customModule="Reciplease" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lEe-Sh-lkz" id="GFJ-JO-Y8p">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="PgT-F5-UlE" kind="show" identifier="segueToRecipeDetail" id="xYS-ke-oLG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="LHc-N5-gew" id="bsn-Hd-rCa"/>
+                                    <outlet property="delegate" destination="LHc-N5-gew" id="XBB-5c-Uw5"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -63,7 +71,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="tj7-29-WBG"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="PgT-F5-UlE" kind="show" identifier="segueToDetailRecipe" id="9QO-fy-GKD"/>
+                        <outlet property="tableView" destination="EjA-aG-qdo" id="oLm-ZZ-Fn6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GW8-fy-TeU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -77,16 +85,6 @@
                     <view key="view" contentMode="scaleToFill" id="KJa-n9-06P">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="786-ht-00w">
-                                <rect key="frame" x="106" y="187" width="108" height="81"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="DZNFIEB" destination="PgT-F5-UlE" eventType="touchUpInside" id="NNN-2H-iwp"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="iGx-qq-9ht"/>
                     </view>
@@ -140,7 +138,6 @@
                                 </state>
                                 <connections>
                                     <action selector="searchRecipes" destination="HaQ-Kp-bAJ" eventType="touchUpInside" id="Gd1-MA-Z1W"/>
-                                    <segue destination="LHc-N5-gew" kind="show" identifier="segueToListRecipe" id="ufW-1B-p7w"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CrT-up-Dek">
@@ -254,6 +251,7 @@
                     <connections>
                         <outlet property="tableView" destination="u9E-DT-hFd" id="eyG-0k-7Cr"/>
                         <outlet property="textField" destination="geE-Ng-vre" id="t2x-YE-eBA"/>
+                        <segue destination="LHc-N5-gew" kind="show" identifier="segueToRecipesList" id="loO-cy-KZf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gC-MP-nD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -282,6 +280,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ufW-1B-p7w"/>
+        <segue reference="loO-cy-KZf"/>
     </inferredMetricsTieBreakers>
 </document>

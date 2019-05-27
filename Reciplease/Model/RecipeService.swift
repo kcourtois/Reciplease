@@ -6,8 +6,6 @@
 //  Copyright © 2019 Kévin Courtois. All rights reserved.
 //
 
-    //https://api.edamam.com/search?q=chicken&app_id=f7b6a07b&app_key=bf62a82ba3c9659ffaa76c91fdfe8d08
-
 import Foundation
 import Alamofire
 import SwiftyJSON
@@ -20,23 +18,40 @@ enum NetworkError: Error {
 class RecipeService {
     var searchResults = [JSON]()
 
-    func search(searchText: String, completionHandler: @escaping ([JSON]?, NetworkError) -> Void) {
+    func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
         let urlToSearch =
         "http://api.edamam.com/search?q=\(searchText)&app_id=f7b6a07b&app_key=bf62a82ba3c9659ffaa76c91fdfe8d08"
         AF.request(urlToSearch).responseJSON { response in
-            guard let data = response.data, let json = try? JSON(data: data) else {
+            guard let data = response.data, let json = try? JSON(data: data), let arr = json["hits"].array else {
                 completionHandler(nil, .failure)
                 print("fail")
                 return
             }
 
-            json["hits"].array?.forEach({ (hit) in
-                let recipe = hit["recipe"]
-                print(recipe["label"].stringValue)
-                print(recipe["image"].stringValue)
-            })
+            var recipes: [Recipe] = []
 
-            completionHandler(nil, .success)
+            for (index, hit) in arr.enumerated() {
+                let recipeJSON = hit["recipe"]
+                self.fetchImage(url: recipeJSON["image"].stringValue, completionHandler: { (result, success) in
+
+                    guard let img = result, success == .success else {
+                        completionHandler(nil, .failure)
+                        return
+                    }
+
+                    let stringArr: [String] = recipeJSON["ingredientLines"].arrayValue.map { $0.stringValue}
+
+                    let recipe = Recipe(name: recipeJSON["label"].stringValue, image: img,
+                                        time: recipeJSON["totalTime"].intValue,
+                                        servings: recipeJSON["yield"].intValue, ingredients: stringArr)
+
+                    recipes.append(recipe)
+
+                    if index == arr.count-1 {
+                        completionHandler(recipes, .success)
+                    }
+                })
+            }
         }
     }
 

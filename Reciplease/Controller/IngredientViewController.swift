@@ -10,7 +10,8 @@ import UIKit
 
 class IngredientViewController: UIViewController {
 
-    var ingredients: [String] = []
+    private var ingredients: [String] = []
+    private var recipes: [Recipe] = []
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
@@ -33,17 +34,31 @@ class IngredientViewController: UIViewController {
     }
 
     @IBAction func searchRecipes() {
-        let rserv = RecipeService()
+        let recipeService = RecipeService()
         var search = ""
         for ingredient in ingredients {
+            //Remove "- " from ingredient text
             let index = ingredient.index(ingredient.endIndex, offsetBy: -ingredient.count+2)
-            let substring = ingredient[index...] // playground
+            let substring = ingredient[index...]
             search += "+" + String(substring)
         }
 
-        rserv.search(searchText: search) { (_, _) in
-            //
+        recipeService.search(searchText: search) { (result, success) in
+            guard let res = result, success == .success else {
+                return
+            }
+
+            self.recipes = res
+            self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
         }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "segueToRecipesList",
+            let recipeListVC = segue.destination as? RecipeListViewController else {
+                return
+        }
+        recipeListVC.recipes = recipes
     }
 }
 
