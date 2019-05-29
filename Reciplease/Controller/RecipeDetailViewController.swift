@@ -43,10 +43,6 @@ class RecipeDetailViewController: UIViewController {
         recipeResume.servings.text = "\(recipe.servings)"
         recipeResume.time.text = "\(recipe.time) m"
         recipeResume.subtitle.text = ""
-
-        let storage = RecipeStorageManager()
-        _ = storage.insertFavorite(recipe: recipe)
-        storage.save()
     }
 }
 

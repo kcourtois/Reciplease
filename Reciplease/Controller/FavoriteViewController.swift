@@ -22,10 +22,9 @@ class FavoriteViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "segueToRecipeDetail",
+        guard segue.identifier == "segueToFavoriteDetail",
             let recipeDetailVC = segue.destination as? RecipeDetailViewController,
             let recipeIndex = tableView.indexPathForSelectedRow?.row else {
-                print("fail")
                 return
         }
 
@@ -81,7 +80,7 @@ extension FavoriteViewController: UITableViewDataSource {
 
 extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "segueToRecipeDetail", sender: self)
+        performSegue(withIdentifier: "segueToFavoriteDetail", sender: self)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

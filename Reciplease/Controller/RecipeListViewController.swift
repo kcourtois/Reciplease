@@ -25,7 +25,6 @@ class RecipeListViewController: UIViewController {
         guard segue.identifier == "segueToRecipeDetail",
             let recipeDetailVC = segue.destination as? RecipeDetailViewController,
             let recipeIndex = tableView.indexPathForSelectedRow?.row else {
-                print("fail")
                 return
         }
         recipeDetailVC.recipe = recipes[recipeIndex]
