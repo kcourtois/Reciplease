@@ -16,7 +16,8 @@ enum NetworkError: Error {
 }
 
 class RecipeService {
-    var searchResults = [JSON]()
+    static var shared = RecipeService()
+    private init() {}
 
     func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
         let urlToSearch =

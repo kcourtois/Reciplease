@@ -34,7 +34,6 @@ class IngredientViewController: UIViewController {
     }
 
     @IBAction func searchRecipes() {
-        let recipeService = RecipeService()
         var search = ""
         for ingredient in ingredients {
             //Remove "- " from ingredient text
@@ -43,7 +42,7 @@ class IngredientViewController: UIViewController {
             search += "+" + String(substring)
         }
 
-        recipeService.search(searchText: search) { (result, success) in
+        RecipeService.shared.search(searchText: search) { (result, success) in
             guard let res = result, success == .success else {
                 return
             }
@@ -59,6 +58,7 @@ class IngredientViewController: UIViewController {
                 return
         }
         recipeListVC.recipes = recipes
+        recipeListVC.showFavoritesList = false
     }
 }
 

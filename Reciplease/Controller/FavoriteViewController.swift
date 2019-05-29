@@ -1,24 +1,24 @@
 //
-//  RecipeListViewController.swift
+//  FavoriteViewController.swift
 //  Reciplease
 //
-//  Created by Kévin Courtois on 23/05/2019.
+//  Created by Kévin Courtois on 29/05/2019.
 //  Copyright © 2019 Kévin Courtois. All rights reserved.
 //
 
 import UIKit
 
-class RecipeListViewController: UIViewController {
+class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var recipes: [Recipe] = []
+    var favorites: [FavoriteRecipe] = []
+    let storage = RecipeStorageManager()
     var showFavoritesList: Bool = true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if showFavoritesList {
-            fillFavoriteRecipesList()
-        }
+        favorites = storage.fetchAll()
+        tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -28,38 +28,39 @@ class RecipeListViewController: UIViewController {
                 print("fail")
                 return
         }
-        recipeDetailVC.recipe = recipes[recipeIndex]
+
+        guard let recipe = favoriteToRecipe(favorite: favorites[recipeIndex]) else {
+            return
+        }
+
+        recipeDetailVC.recipe = recipe
     }
 
-    func fillFavoriteRecipesList() {
-        let storage = RecipeStorageManager()
-
-        for favorite in storage.fetchAll() {
+    func favoriteToRecipe(favorite: FavoriteRecipe) -> Recipe? {
             guard let name = favorite.name,
                 let imgData = favorite.image,
                 let ingredients = favorite.ingredients,
                 let source = favorite.source else {
-                    return
+                    return nil
             }
 
             guard let image = UIImage(data: imgData) else {
-                return
+                return nil
             }
 
-            recipes.append(Recipe(name: name, image: image, time: Int(favorite.time),
-                                  servings: Int(favorite.servings), ingredients: ingredients, source: source))
-        }
+            return Recipe(name: name, image: image, time: Int(favorite.time), servings: Int(favorite.servings),
+                          ingredients: ingredients, source: source)
     }
 }
 
-extension RecipeListViewController: UITableViewDataSource {
+extension FavoriteViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
+        return favorites.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,14 +69,17 @@ extension RecipeListViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
 
-        let recipe = recipes[indexPath.row]
+        guard let recipe = favoriteToRecipe(favorite: favorites[indexPath.row]) else {
+            return UITableViewCell()
+        }
+
         cell.configure(recipe: recipe)
 
         return cell
     }
 }
 
-extension RecipeListViewController: UITableViewDelegate {
+extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "segueToRecipeDetail", sender: self)
     }

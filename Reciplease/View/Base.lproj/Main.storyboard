@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="LHc-N5-gew" kind="relationship" relationship="rootViewController" id="GbR-2B-kPk"/>
+                        <segue destination="NbV-rc-HCD" kind="relationship" relationship="rootViewController" id="Z5u-hi-5cI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWY-5g-bzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GW8-fy-TeU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3075" y="363.38028169014086"/>
+            <point key="canvasLocation" x="3977" y="-457"/>
         </scene>
         <!--Reciplease-->
         <scene sceneID="EjP-x9-Wai">
@@ -378,8 +378,68 @@
             </objects>
             <point key="canvasLocation" x="1163" y="-52"/>
         </scene>
+        <!--Reciplease-->
+        <scene sceneID="PgN-27-elU">
+            <objects>
+                <viewController id="NbV-rc-HCD" customClass="FavoriteViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wrh-C6-aQG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bLt-Xn-Bx6">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="120" id="JqX-x5-oLN" customClass="RecipeTableViewCell" customModule="Reciplease" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JqX-x5-oLN" id="92X-kO-XeE" userLabel="View">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gA-9f-EIp" customClass="RecipeResume" customModule="Reciplease" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2gA-9f-EIp" firstAttribute="leading" secondItem="92X-kO-XeE" secondAttribute="leading" id="2hy-GQ-EP4"/>
+                                                <constraint firstAttribute="bottom" secondItem="2gA-9f-EIp" secondAttribute="bottom" id="9H6-8F-lyg"/>
+                                                <constraint firstItem="2gA-9f-EIp" firstAttribute="top" secondItem="92X-kO-XeE" secondAttribute="top" id="SNn-25-rY2"/>
+                                                <constraint firstAttribute="trailing" secondItem="2gA-9f-EIp" secondAttribute="trailing" id="coG-4J-TNM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="recipeResume" destination="2gA-9f-EIp" id="Nvg-bw-eoD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NbV-rc-HCD" id="jqi-JJ-3Y8"/>
+                                    <outlet property="delegate" destination="NbV-rc-HCD" id="qil-Kx-vB3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bLt-Xn-Bx6" firstAttribute="top" secondItem="BOx-aN-i1S" secondAttribute="top" id="c8P-Dq-zef"/>
+                            <constraint firstItem="bLt-Xn-Bx6" firstAttribute="leading" secondItem="BOx-aN-i1S" secondAttribute="leading" id="cQ7-Vp-mZb"/>
+                            <constraint firstItem="BOx-aN-i1S" firstAttribute="bottom" secondItem="bLt-Xn-Bx6" secondAttribute="bottom" id="ixv-oJ-A8G"/>
+                            <constraint firstItem="BOx-aN-i1S" firstAttribute="trailing" secondItem="bLt-Xn-Bx6" secondAttribute="trailing" id="oRV-nY-FWP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BOx-aN-i1S"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Reciplease" id="Mwd-oQ-JuG">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="EpS-rj-E5L"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="bLt-Xn-Bx6" id="DNA-y0-cxy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Nv-QE-D0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3075" y="363"/>
+        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="loO-cy-KZf"/>
-    </inferredMetricsTieBreakers>
 </document>
