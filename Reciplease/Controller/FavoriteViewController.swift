@@ -48,7 +48,7 @@ class FavoriteViewController: UIViewController {
             }
 
             return Recipe(name: name, image: image, time: Int(favorite.time), servings: Int(favorite.servings),
-                          ingredients: ingredients, source: source, favorite: true)
+                          ingredients: ingredients, source: source)
     }
 }
 

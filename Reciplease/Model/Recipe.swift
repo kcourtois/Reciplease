@@ -16,5 +16,4 @@ struct Recipe {
     let servings: Int
     let ingredients: [String]
     let source: String
-    var favorite: Bool
 }

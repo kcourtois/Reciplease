@@ -14,12 +14,21 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet weak var recipeResume: RecipeResume!
 
     var recipe: Recipe = Recipe(name: "Erreur", image: UIImage(), time: 0, servings: 0,
-                                ingredients: [], source: "", favorite: false)
+                                ingredients: [], source: "")
+    private var favorite: FavoriteRecipe?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBarButton()
         setRecipeView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        favorite = nil
+        let storage = RecipeStorageManager()
+        for (index, fav) in storage.fetchAll().enumerated() where recipe.source == fav.source {
+            favorite = storage.fetchAll()[index]
+        }
+        setBarButton()
     }
 
     @IBAction func getDirections() {
@@ -30,7 +39,7 @@ class RecipeDetailViewController: UIViewController {
     }
 
     @objc func favoriteTapped() {
-        recipe.favorite = !recipe.favorite
+        handleFavoriteStorage()
         setBarButton()
     }
 
@@ -45,7 +54,7 @@ class RecipeDetailViewController: UIViewController {
     private func setBarButton() {
         var image = UIImage()
 
-        if recipe.favorite {
+        if favorite != nil {
             image = #imageLiteral(resourceName: "greenstar")
         } else {
             image = #imageLiteral(resourceName: "whitestar")
@@ -59,6 +68,21 @@ class RecipeDetailViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: button)
         //assign button to navigationbar
         self.navigationItem.rightBarButtonItem = barButton
+    }
+
+    private func handleFavoriteStorage() {
+        let storage = RecipeStorageManager()
+        if favorite == nil {
+            favorite = storage.insertFavorite(recipe: recipe)
+            storage.save()
+        } else {
+            guard let fav = favorite else {
+                return
+            }
+            storage.remove(objectID: fav.objectID)
+            storage.save()
+            favorite = nil
+        }
     }
 }
 

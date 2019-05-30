@@ -42,7 +42,7 @@ class PersistentFavoriteTests: XCTestCase {
 
         //Given a recipe
         let recipe = Recipe(name: "Cheesecake", image: UIImage(), time: 0, servings: 2,
-                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/", favorite: false)
+                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
 
         //When add to favorites
         let favorite = sut.insertFavorite(recipe: recipe)
@@ -84,7 +84,7 @@ class PersistentFavoriteTests: XCTestCase {
 
         //Given a recipe
         let recipe = Recipe(name: "Cheesecake", image: UIImage(), time: 0, servings: 2,
-                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/", favorite: false)
+                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
 
         _ = expectationForSaveNotification()
 
@@ -169,7 +169,7 @@ extension PersistentFavoriteTests {
 
         for index in 0..<5 {
             let recipe = Recipe(name: "Cheesecake\(index)", image: UIImage(), time: 0, servings: 2,
-                                ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/", favorite: false)
+                                ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
             _ = insertFavorite(recipe: recipe)
         }
 
