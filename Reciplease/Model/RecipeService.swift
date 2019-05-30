@@ -45,7 +45,8 @@ class RecipeService {
                     let recipe = Recipe(name: recipeJSON["label"].stringValue, image: img,
                                         time: recipeJSON["totalTime"].intValue,
                                         servings: recipeJSON["yield"].intValue, ingredients: stringArr,
-                                        source: recipeJSON["url"].stringValue)
+                                        source: recipeJSON["url"].stringValue,
+                                        favorite: false)
 
                     recipes.append(recipe)
 

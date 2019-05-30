@@ -30,6 +30,7 @@ class PersistentFavoriteTests: XCTestCase {
     }
 
     override func tearDown() {
+         // swiftlint:disable:next notification_center_detachment
         NotificationCenter.default.removeObserver(self)
 
         flushData()
@@ -41,7 +42,7 @@ class PersistentFavoriteTests: XCTestCase {
 
         //Given a recipe
         let recipe = Recipe(name: "Cheesecake", image: UIImage(), time: 0, servings: 2,
-                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
+                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/", favorite: false)
 
         //When add to favorites
         let favorite = sut.insertFavorite(recipe: recipe)
@@ -83,7 +84,7 @@ class PersistentFavoriteTests: XCTestCase {
 
         //Given a recipe
         let recipe = Recipe(name: "Cheesecake", image: UIImage(), time: 0, servings: 2,
-                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
+                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/", favorite: false)
 
         _ = expectationForSaveNotification()
 
@@ -126,7 +127,7 @@ class PersistentFavoriteTests: XCTestCase {
     }()
 
     // MARK: Convinient function for notification
-    var saveNotificationCompleteHandler: ((Notification)->Void)?
+    var saveNotificationCompleteHandler: ((Notification) -> Void)?
 
     func expectationForSaveNotification() -> XCTestExpectation {
         let expect = expectation(description: "Context Saved")
@@ -136,7 +137,7 @@ class PersistentFavoriteTests: XCTestCase {
         return expect
     }
 
-    func waitForSavedNotification(completeHandler: @escaping ((Notification)->Void) ) {
+    func waitForSavedNotification(completeHandler: @escaping ((Notification) -> Void) ) {
         saveNotificationCompleteHandler = completeHandler
     }
 
@@ -168,7 +169,7 @@ extension PersistentFavoriteTests {
 
         for index in 0..<5 {
             let recipe = Recipe(name: "Cheesecake\(index)", image: UIImage(), time: 0, servings: 2,
-                                ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
+                                ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/", favorite: false)
             _ = insertFavorite(recipe: recipe)
         }
 

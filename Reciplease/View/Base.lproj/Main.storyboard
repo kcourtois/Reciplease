@@ -252,6 +252,9 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="HaQ-Kp-bAJ" id="MZq-dD-t36"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zl-s1-Z8V">
                                         <rect key="frame" x="244.5" y="52" width="59.5" height="33"/>
@@ -333,6 +336,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="xfN-uj-1C4" firstAttribute="top" secondItem="CrT-up-Dek" secondAttribute="bottom" constant="30" id="2Y9-8N-HnE"/>
                             <constraint firstItem="NuA-HM-vtT" firstAttribute="centerY" secondItem="xfN-uj-1C4" secondAttribute="centerY" id="AVS-sC-4D9"/>
@@ -352,6 +356,9 @@
                             <constraint firstItem="bYI-B0-vpS" firstAttribute="trailing" secondItem="NuA-HM-vtT" secondAttribute="trailing" constant="16" id="tqD-rB-vVI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bYI-B0-vpS"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="YiP-QJ-2fJ" appends="YES" id="kC2-E6-gFj"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="du1-ps-HCZ">
                         <barButtonItem key="backBarButtonItem" title="Back" id="qsS-bu-Mfh"/>
@@ -363,6 +370,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gC-MP-nD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="YiP-QJ-2fJ">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="HaQ-Kp-bAJ" id="x3A-v8-YN7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3075" y="-457"/>
         </scene>

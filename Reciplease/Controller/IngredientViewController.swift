@@ -21,11 +21,12 @@ class IngredientViewController: UIViewController {
     }
 
     @IBAction func addIngredient() {
-        if let text = textField.text {
-            ingredients.append("- "+text)
-            textField.text = ""
-            tableView.reloadData()
+        guard let text = textField.text, !text.isEmpty else {
+            return
         }
+        ingredients.append("- "+text)
+        textField.text = ""
+        tableView.reloadData()
     }
 
     @IBAction func clearIngredients() {
@@ -62,6 +63,7 @@ class IngredientViewController: UIViewController {
     }
 }
 
+// MARK: - Tableview
 extension IngredientViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -80,5 +82,16 @@ extension IngredientViewController: UITableViewDataSource {
 
         return cell
     }
+}
 
+// MARK: - Keyboard
+extension IngredientViewController: UITextFieldDelegate {
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        textField.resignFirstResponder()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        addIngredient()
+        return true
+    }
 }

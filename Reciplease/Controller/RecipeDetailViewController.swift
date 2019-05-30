@@ -13,13 +13,12 @@ class RecipeDetailViewController: UIViewController {
 
     @IBOutlet weak var recipeResume: RecipeResume!
 
-    var recipe: Recipe = Recipe(name: "Erreur", image: UIImage(), time: 0, servings: 0, ingredients: [], source: "")
+    var recipe: Recipe = Recipe(name: "Erreur", image: UIImage(), time: 0, servings: 0,
+                                ingredients: [], source: "", favorite: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let favorite = UIBarButtonItem(image: #imageLiteral(resourceName: "whitestar"), style: .plain, target: self, action: #selector(favoriteTapped))
-        navigationItem.rightBarButtonItem = favorite
-
+        setBarButton()
         setRecipeView()
     }
 
@@ -31,10 +30,8 @@ class RecipeDetailViewController: UIViewController {
     }
 
     @objc func favoriteTapped() {
-        print("tap")
-        //add favorite
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "greenstar"), style: .plain,
-                                                                 target: self, action: #selector(favoriteTapped))
+        recipe.favorite = !recipe.favorite
+        setBarButton()
     }
 
     private func setRecipeView() {
@@ -43,6 +40,25 @@ class RecipeDetailViewController: UIViewController {
         recipeResume.servings.text = "\(recipe.servings)"
         recipeResume.time.text = "\(recipe.time) m"
         recipeResume.subtitle.text = ""
+    }
+
+    private func setBarButton() {
+        var image = UIImage()
+
+        if recipe.favorite {
+            image = #imageLiteral(resourceName: "greenstar")
+        } else {
+            image = #imageLiteral(resourceName: "whitestar")
+        }
+
+        //create a new button
+        let button = UIButton(type: .custom)
+        button.setImage(image, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
     }
 }
 

@@ -46,7 +46,8 @@ class RecipeListViewController: UIViewController {
             }
 
             recipes.append(Recipe(name: name, image: image, time: Int(favorite.time),
-                                  servings: Int(favorite.servings), ingredients: ingredients, source: source))
+                                  servings: Int(favorite.servings), ingredients: ingredients,
+                                  source: source, favorite: false))
         }
     }
 }
