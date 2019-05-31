@@ -100,6 +100,31 @@ class PersistentFavoriteTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
+    func testGivenARecipeSavedWhenFetchingFavoriteThenShouldFindSameSource() {
+        //Given a recipe
+        let recipe = Recipe(name: "Cheesecake", image: UIImage(), time: 0, servings: 2,
+                            ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/3")
+
+        //When calling fetchFavorite
+        let favorite = sut.fetchFavorite(recipe: recipe)
+
+        //Then should find fav with same source
+        XCTAssertNotNil(favorite)
+        XCTAssertEqual(recipe.source, favorite?.source)
+    }
+
+    func testGivenARecipeNotSavedWhenFetchingFavoriteThenShouldReturnNil() {
+        //Given a recipe
+        let recipe = Recipe(name: "Cheesecake", image: UIImage(), time: 0, servings: 2,
+                            ingredients: ["cheese", "cake"], source: "https://google.com/")
+
+        //When calling fetchFavorite
+        let favorite = sut.fetchFavorite(recipe: recipe)
+
+        //Then should not find favorite
+        XCTAssertNil(favorite)
+    }
+
     // MARK: mock in-memory persistant store
     lazy var managedObjectModel: NSManagedObjectModel = {
         let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))] )!
@@ -169,7 +194,7 @@ extension PersistentFavoriteTests {
 
         for index in 0..<5 {
             let recipe = Recipe(name: "Cheesecake\(index)", image: UIImage(), time: 0, servings: 2,
-                                ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/")
+                                ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/\(index)")
             _ = insertFavorite(recipe: recipe)
         }
 

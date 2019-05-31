@@ -12,13 +12,9 @@ class RecipeListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var recipes: [Recipe] = []
-    var showFavoritesList: Bool = true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if showFavoritesList {
-            fillFavoriteRecipesList()
-        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -28,27 +24,6 @@ class RecipeListViewController: UIViewController {
                 return
         }
         recipeDetailVC.recipe = recipes[recipeIndex]
-    }
-
-    func fillFavoriteRecipesList() {
-        let storage = RecipeStorageManager()
-
-        for favorite in storage.fetchAll() {
-            guard let name = favorite.name,
-                let imgData = favorite.image,
-                let ingredients = favorite.ingredients,
-                let source = favorite.source else {
-                    return
-            }
-
-            guard let image = UIImage(data: imgData) else {
-                return
-            }
-
-            recipes.append(Recipe(name: name, image: image, time: Int(favorite.time),
-                                  servings: Int(favorite.servings), ingredients: ingredients,
-                                  source: source))
-        }
     }
 }
 

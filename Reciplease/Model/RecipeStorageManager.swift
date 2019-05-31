@@ -11,7 +11,6 @@ import CoreData
 import UIKit
 
 class RecipeStorageManager {
-
     let persistentContainer: NSPersistentContainer!
 
     lazy var backgroundContext: NSManagedObjectContext = {
@@ -70,6 +69,16 @@ class RecipeStorageManager {
             }
         }
 
+    }
+
+    //Compare given recipe source to favorites, and return same favorite recipe if exists
+    func fetchFavorite(recipe: Recipe) -> FavoriteRecipe? {
+        var favorite: FavoriteRecipe?
+        let favs = fetchAll()
+        for (index, fav) in favs.enumerated() where recipe.source == fav.source {
+            favorite = favs[index]
+        }
+        return favorite
     }
 
 }

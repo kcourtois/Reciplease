@@ -20,9 +20,17 @@ class RecipeService {
     private init() {}
 
     func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
+
         let urlToSearch =
-        "http://api.edamam.com/search?q=\(searchText)&app_id=f7b6a07b&app_key=bf62a82ba3c9659ffaa76c91fdfe8d08"
-        AF.request(urlToSearch).responseJSON { response in
+            "http://api.edamam.com/search?q=\(searchText)" +
+            "&app_id=\(ApiKeys.edamamAppId)&" +
+            "app_key=\(ApiKeys.edamamKey)"
+
+        guard let urlString = urlToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return completionHandler(nil, .failure)
+        }
+
+        AF.request(urlString).responseJSON { response in
             guard let data = response.data, let json = try? JSON(data: data), let arr = json["hits"].array else {
                 completionHandler(nil, .failure)
                 print("fail")

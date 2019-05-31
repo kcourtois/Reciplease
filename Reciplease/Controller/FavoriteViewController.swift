@@ -13,7 +13,6 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var favorites: [FavoriteRecipe] = []
     let storage = RecipeStorageManager()
-    var showFavoritesList: Bool = true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

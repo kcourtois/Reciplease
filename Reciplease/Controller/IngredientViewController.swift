@@ -10,7 +10,6 @@ import UIKit
 
 class IngredientViewController: UIViewController {
 
-    private var ingredients: [String] = []
     private var recipes: [Recipe] = []
 
     @IBOutlet weak var tableView: UITableView!
@@ -21,33 +20,42 @@ class IngredientViewController: UIViewController {
     }
 
     @IBAction func addIngredient() {
+        //If textfield empty, do nothing
         guard let text = textField.text, !text.isEmpty else {
             return
         }
-        ingredients.append("- "+text)
+        //Else add ingredient to the list
+        IngredientService.ingredients.append("- "+text)
         textField.text = ""
         tableView.reloadData()
     }
 
     @IBAction func clearIngredients() {
-        ingredients = []
+        IngredientService.ingredients = []
         tableView.reloadData()
     }
 
     @IBAction func searchRecipes() {
+        //shows a loading alert
+        let alert = loadingAlert()
+
         var search = ""
-        for ingredient in ingredients {
+        for ingredient in IngredientService.ingredients {
             //Remove "- " from ingredient text
             let index = ingredient.index(ingredient.endIndex, offsetBy: -ingredient.count+2)
             let substring = ingredient[index...]
-            search += "+" + String(substring)
+            search += " " + String(substring)
         }
 
+        //API Call to search recipes
         RecipeService.shared.search(searchText: search) { (result, success) in
             guard let res = result, success == .success else {
+                self.presentAlert(title: "Error", message: "Couldn't access to the network. Try again later.")
                 return
             }
 
+            //end of api calls, dimiss loading alert
+            alert.dismiss(animated: false, completion: nil)
             self.recipes = res
             self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
         }
@@ -59,7 +67,6 @@ class IngredientViewController: UIViewController {
                 return
         }
         recipeListVC.recipes = recipes
-        recipeListVC.showFavoritesList = false
     }
 }
 
@@ -70,13 +77,13 @@ extension IngredientViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ingredients.count
+        return IngredientService.ingredients.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath)
-        let ingredient = ingredients[indexPath.row]
+        let ingredient = IngredientService.ingredients[indexPath.row]
 
         cell.textLabel?.text = ingredient
 

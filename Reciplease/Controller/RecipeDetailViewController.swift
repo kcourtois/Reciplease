@@ -13,7 +13,7 @@ class RecipeDetailViewController: UIViewController {
 
     @IBOutlet weak var recipeResume: RecipeResume!
 
-    var recipe: Recipe = Recipe(name: "Erreur", image: UIImage(), time: 0, servings: 0,
+    var recipe: Recipe = Recipe(name: "Error", image: UIImage(), time: 0, servings: 0,
                                 ingredients: [], source: "")
     private var favorite: FavoriteRecipe?
 
@@ -23,11 +23,9 @@ class RecipeDetailViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        favorite = nil
         let storage = RecipeStorageManager()
-        for (index, fav) in storage.fetchAll().enumerated() where recipe.source == fav.source {
-            favorite = storage.fetchAll()[index]
-        }
+        //Retrieve favorite recipe if exists
+        favorite = storage.fetchFavorite(recipe: recipe)
         setBarButton()
     }
 
@@ -75,6 +73,7 @@ class RecipeDetailViewController: UIViewController {
         if favorite == nil {
             favorite = storage.insertFavorite(recipe: recipe)
             storage.save()
+            presentAlertDelay(title: "Added favorite", message: "Successfully added recipe to favorites", delay: 1)
         } else {
             guard let fav = favorite else {
                 return
@@ -82,6 +81,8 @@ class RecipeDetailViewController: UIViewController {
             storage.remove(objectID: fav.objectID)
             storage.save()
             favorite = nil
+            presentAlertDelay(title: "Removed favorite",
+                              message: "Successfully removed recipe from favorites", delay: 1)
         }
     }
 }
