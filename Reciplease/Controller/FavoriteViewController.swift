@@ -27,27 +27,11 @@ class FavoriteViewController: UIViewController {
                 return
         }
 
-        guard let recipe = favoriteToRecipe(favorite: favorites[recipeIndex]) else {
+        guard let recipe = Recipe(favorite: favorites[recipeIndex]) else {
             return
         }
 
         recipeDetailVC.recipe = recipe
-    }
-
-    func favoriteToRecipe(favorite: FavoriteRecipe) -> Recipe? {
-            guard let name = favorite.name,
-                let imgData = favorite.image,
-                let ingredients = favorite.ingredients,
-                let source = favorite.source else {
-                    return nil
-            }
-
-            guard let image = UIImage(data: imgData) else {
-                return nil
-            }
-
-            return Recipe(name: name, image: image, time: Int(favorite.time), servings: Int(favorite.servings),
-                          ingredients: ingredients, source: source)
     }
 }
 
@@ -67,7 +51,7 @@ extension FavoriteViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
 
-        guard let recipe = favoriteToRecipe(favorite: favorites[indexPath.row]) else {
+        guard let recipe = Recipe(favorite: favorites[indexPath.row]) else {
             return UITableViewCell()
         }
 

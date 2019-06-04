@@ -13,10 +13,6 @@ class RecipeListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var recipes: [Recipe] = []
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "segueToRecipeDetail",
             let recipeDetailVC = segue.destination as? RecipeDetailViewController,

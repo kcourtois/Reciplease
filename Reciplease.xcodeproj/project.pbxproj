@@ -24,6 +24,7 @@
 		9E82A81522A170CA00B7234D /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81422A170CA00B7234D /* AlertExtension.swift */; };
 		9E82A81722A1821700B7234D /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81622A1821700B7234D /* IngredientService.swift */; };
 		9E82A81922A1845E00B7234D /* IngredientServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81822A1845E00B7234D /* IngredientServiceTests.swift */; };
+		9E82A81B22A56C4300B7234D /* RecipeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81A22A56C4300B7234D /* RecipeServiceTests.swift */; };
 		9EFDF440229EAF600040A3A1 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF43E229EAF600040A3A1 /* Reciplease.xcdatamodeld */; };
 		9EFDF442229EB0190040A3A1 /* RecipeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF441229EB0190040A3A1 /* RecipeStorageManager.swift */; };
 		9EFDF446229EC2D20040A3A1 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF445229EC2D20040A3A1 /* FavoriteViewController.swift */; };
@@ -67,6 +68,7 @@
 		9E82A81422A170CA00B7234D /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		9E82A81622A1821700B7234D /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		9E82A81822A1845E00B7234D /* IngredientServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientServiceTests.swift; sourceTree = "<group>"; };
+		9E82A81A22A56C4300B7234D /* RecipeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTests.swift; sourceTree = "<group>"; };
 		9EFDF43F229EAF600040A3A1 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		9EFDF441229EB0190040A3A1 /* RecipeStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStorageManager.swift; sourceTree = "<group>"; };
 		9EFDF445229EC2D20040A3A1 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				9E68398F2296D10600DD90E6 /* Info.plist */,
 				9EFDF447229EC85C0040A3A1 /* PersistentFavoriteTests.swift */,
 				9E82A81822A1845E00B7234D /* IngredientServiceTests.swift */,
+				9E82A81A22A56C4300B7234D /* RecipeServiceTests.swift */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 			files = (
 				9E82A81922A1845E00B7234D /* IngredientServiceTests.swift in Sources */,
 				9EFDF449229ED07A0040A3A1 /* Reciplease.xcdatamodeld in Sources */,
+				9E82A81B22A56C4300B7234D /* RecipeServiceTests.swift in Sources */,
 				9EFDF448229EC85C0040A3A1 /* PersistentFavoriteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

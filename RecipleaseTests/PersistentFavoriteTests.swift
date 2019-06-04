@@ -125,6 +125,17 @@ class PersistentFavoriteTests: XCTestCase {
         XCTAssertNil(favorite)
     }
 
+    func testGivenFavoriteWhenCreatingRecipeShoudNotBeNil() {
+        //Given a item in persistent store
+        let items = sut.fetchAll()
+        let item = items[0]
+
+        let recipe = Recipe(favorite: item)
+
+        //Assert recipe created
+        XCTAssertNotNil(recipe)
+    }
+
     // MARK: mock in-memory persistant store
     lazy var managedObjectModel: NSManagedObjectModel = {
         let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle(for: type(of: self))] )!
@@ -193,7 +204,7 @@ extension PersistentFavoriteTests {
         }
 
         for index in 0..<5 {
-            let recipe = Recipe(name: "Cheesecake\(index)", image: UIImage(), time: 0, servings: 2,
+            let recipe = Recipe(name: "Cheesecake\(index)", image: UIColor.green.image(), time: 0, servings: 2,
                                 ingredients: ["cheese", "cake"], source: "https://stackoverflow.com/\(index)")
             _ = insertFavorite(recipe: recipe)
         }
@@ -227,4 +238,13 @@ extension PersistentFavoriteTests {
         return results.count
     }
 
+}
+
+extension UIColor {
+    func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+            self.setFill()
+            rendererContext.fill(CGRect(origin: .zero, size: size))
+        }
+    }
 }
