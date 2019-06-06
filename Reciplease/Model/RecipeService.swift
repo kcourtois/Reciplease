@@ -19,12 +19,13 @@ class RecipeService {
     static var shared = RecipeService()
     private init() {}
 
-    func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
+    func search(searchText: String, filters: [String], completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
 
         let urlToSearch =
             "http://api.edamam.com/search?q=\(searchText)" +
             "&app_id=\(ApiKeys.edamamAppId)&" +
-            "app_key=\(ApiKeys.edamamKey)"
+            "app_key=\(ApiKeys.edamamKey)" +
+            addFilters(filters: filters)
 
         guard let urlString = urlToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return completionHandler(nil, .failure)
@@ -33,7 +34,6 @@ class RecipeService {
         AF.request(urlString).responseJSON { response in
             guard let data = response.data, let json = try? JSON(data: data), let arr = json["hits"].array else {
                 completionHandler(nil, .failure)
-                print("fail")
                 return
             }
 
@@ -80,5 +80,13 @@ class RecipeService {
 
             completionHandler(image, .success)
         }
+    }
+
+    private func addFilters(filters: [String]) -> String {
+        var value = ""
+        for filter in filters {
+            value += "&health=\(filter)"
+        }
+        return value
     }
 }

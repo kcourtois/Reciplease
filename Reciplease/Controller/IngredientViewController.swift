@@ -49,16 +49,17 @@ class IngredientViewController: UIViewController {
         }
 
         //API Call to search recipes
-        RecipeService.shared.search(searchText: search) { (result, success) in
-            guard let res = result, success == .success else {
-                self.presentAlert(title: "Error", message: "Couldn't access to the network. Try again later.")
-                return
-            }
-
+        RecipeService.shared.search(searchText: search, filters: tags) { (result, success) in
             //end of api calls, dimiss loading alert
-            alert.dismiss(animated: false, completion: nil)
-            self.recipes = res
-            self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
+            alert.dismiss(animated: false) {
+                guard let res = result, success == .success else {
+                    self.presentAlert(title: "Error", message: "Couldn't handle your request. Try again later.")
+                    return
+                }
+
+                self.recipes = res
+                self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
+            }
         }
     }
 

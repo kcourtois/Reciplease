@@ -9,10 +9,10 @@
 import XCTest
 @testable import Reciplease
 class RecipeServiceTests: XCTestCase {
-    func testGivenResearchWhenCallingSearchShouldHaveResultAndNoError() {
+    func testGivenResearchWhenCallingSearchWithoutFiltersShouldHaveResultAndNoError() {
         let expec = expectation(description: "Alamofire")
 
-        RecipeService.shared.search(searchText: "mozzarella goat cheese") { (result, error) in
+        RecipeService.shared.search(searchText: "mozzarella goat cheese", filters: []) { (result, error) in
             XCTAssertEqual(error, .success)
             XCTAssertNotNil(result, "No result")
             expec.fulfill()
@@ -20,4 +20,22 @@ class RecipeServiceTests: XCTestCase {
 
         waitForExpectations(timeout: 10.0, handler: nil)
     }
+
+    func testGivenResearchWhenCallingSearchWithFiltersShouldHaveResultAndNoError() {
+        let expec = expectation(description: "Alamofire")
+        let list = HealthFilter.getList()
+        XCTAssertEqual(list.count, 28)
+        let filters = [list[0].tag, list[26].tag]
+        print(filters)
+
+        RecipeService.shared.search(searchText: "mozzarella goat cheese",
+                                    filters: filters) { (result, error) in
+            XCTAssertEqual(error, .success)
+            XCTAssertNotNil(result, "No result")
+            expec.fulfill()
+        }
+
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+
 }
