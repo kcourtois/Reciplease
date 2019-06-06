@@ -11,6 +11,7 @@ import UIKit
 class IngredientViewController: UIViewController {
 
     private var recipes: [Recipe] = []
+    var tags: [String] = []
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
@@ -62,11 +63,12 @@ class IngredientViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "segueToRecipesList",
-            let recipeListVC = segue.destination as? RecipeListViewController else {
-                return
+        if segue.identifier == "segueToFilters", let filtersVC = segue.destination as? FiltersViewController {
+            filtersVC.tags = tags
         }
-        recipeListVC.recipes = recipes
+        if segue.identifier == "segueToRecipesList", let recipeListVC = segue.destination as? RecipeListViewController {
+            recipeListVC.recipes = recipes
+        }
     }
 }
 

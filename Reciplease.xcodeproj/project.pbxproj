@@ -25,6 +25,9 @@
 		9E82A81722A1821700B7234D /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81622A1821700B7234D /* IngredientService.swift */; };
 		9E82A81922A1845E00B7234D /* IngredientServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81822A1845E00B7234D /* IngredientServiceTests.swift */; };
 		9E82A81B22A56C4300B7234D /* RecipeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A81A22A56C4300B7234D /* RecipeServiceTests.swift */; };
+		9E82A82722A8087600B7234D /* HealthFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A82622A8087600B7234D /* HealthFilters.swift */; };
+		9E82A82922A8157800B7234D /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A82822A8157800B7234D /* FiltersViewController.swift */; };
+		9E82A82B22A81A2C00B7234D /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E82A82A22A81A2C00B7234D /* FilterTableViewCell.swift */; };
 		9EFDF440229EAF600040A3A1 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF43E229EAF600040A3A1 /* Reciplease.xcdatamodeld */; };
 		9EFDF442229EB0190040A3A1 /* RecipeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF441229EB0190040A3A1 /* RecipeStorageManager.swift */; };
 		9EFDF446229EC2D20040A3A1 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF445229EC2D20040A3A1 /* FavoriteViewController.swift */; };
@@ -69,6 +72,9 @@
 		9E82A81622A1821700B7234D /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		9E82A81822A1845E00B7234D /* IngredientServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientServiceTests.swift; sourceTree = "<group>"; };
 		9E82A81A22A56C4300B7234D /* RecipeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTests.swift; sourceTree = "<group>"; };
+		9E82A82622A8087600B7234D /* HealthFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthFilters.swift; sourceTree = "<group>"; };
+		9E82A82822A8157800B7234D /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		9E82A82A22A81A2C00B7234D /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		9EFDF43F229EAF600040A3A1 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		9EFDF441229EB0190040A3A1 /* RecipeStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStorageManager.swift; sourceTree = "<group>"; };
 		9EFDF445229EC2D20040A3A1 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +164,7 @@
 				9EFDF445229EC2D20040A3A1 /* FavoriteViewController.swift */,
 				9E6839A12297064800DD90E6 /* RecipeDetailViewController.swift */,
 				9E82A81422A170CA00B7234D /* AlertExtension.swift */,
+				9E82A82822A8157800B7234D /* FiltersViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -170,6 +177,7 @@
 				9E68399D2296E22B00DD90E6 /* RecipeResume.xib */,
 				9E6839A7229BD89C00DD90E6 /* RecipeTableViewCell.swift */,
 				9E6839A9229C064E00DD90E6 /* RecipeResume.swift */,
+				9E82A82A22A81A2C00B7234D /* FilterTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +191,7 @@
 				9EFDF441229EB0190040A3A1 /* RecipeStorageManager.swift */,
 				9E82A81222A0288700B7234D /* ApiKeys.swift */,
 				9E82A81622A1821700B7234D /* IngredientService.swift */,
+				9E82A82622A8087600B7234D /* HealthFilters.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -395,6 +404,7 @@
 			files = (
 				9EFDF446229EC2D20040A3A1 /* FavoriteViewController.swift in Sources */,
 				9E68397B2296D10400DD90E6 /* IngredientViewController.swift in Sources */,
+				9E82A82722A8087600B7234D /* HealthFilters.swift in Sources */,
 				9E82A81322A0288700B7234D /* ApiKeys.swift in Sources */,
 				9E6839792296D10400DD90E6 /* AppDelegate.swift in Sources */,
 				9E6839A422981B2400DD90E6 /* RecipeService.swift in Sources */,
@@ -406,6 +416,8 @@
 				9E6839AA229C064E00DD90E6 /* RecipeResume.swift in Sources */,
 				9E6839A02297058800DD90E6 /* RecipeListViewController.swift in Sources */,
 				9E82A81722A1821700B7234D /* IngredientService.swift in Sources */,
+				9E82A82B22A81A2C00B7234D /* FilterTableViewCell.swift in Sources */,
+				9E82A82922A8157800B7234D /* FiltersViewController.swift in Sources */,
 				9EFDF442229EB0190040A3A1 /* RecipeStorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
