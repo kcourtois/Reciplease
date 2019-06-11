@@ -19,13 +19,13 @@ class RecipeService {
     static var shared = RecipeService()
     private init() {}
 
-    func search(searchText: String, filters: [String], completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
+    func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
 
         let urlToSearch =
             "http://api.edamam.com/search?q=\(searchText)" +
             "&app_id=\(ApiKeys.edamamAppId)&" +
             "app_key=\(ApiKeys.edamamKey)" +
-            addFilters(filters: filters)
+            addFilters(filters: Preferences.filters)
 
         guard let urlString = urlToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return completionHandler(nil, .failure)

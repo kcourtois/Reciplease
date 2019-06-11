@@ -13,7 +13,7 @@ class HealthFilter {
     let title: String
     let description: String
 
-    private init(tag: String, title: String, description: String, active: Bool) {
+    private init(tag: String, title: String, description: String) {
         self.tag = tag
         self.title = title
         self.description = description

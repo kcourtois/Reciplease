@@ -30,7 +30,7 @@ class FilterTableViewCell: UITableViewCell {
         self.filter = filter
         titleLabel.text = filter.title
         descriptionLabel.text = filter.description
-        if let _ = getFilterIndex() {
+        if getFilterIndex() != nil {
             cellSwitch.isOn = true
         } else {
             cellSwitch.isOn = false
@@ -39,10 +39,8 @@ class FilterTableViewCell: UITableViewCell {
 
     private func getFilterIndex() -> Int? {
         if let healthFilter = filter {
-            for (index, tag) in Preferences.filters.enumerated() {
-                if tag == healthFilter.tag {
-                    return index
-                }
+            for (index, tag) in Preferences.filters.enumerated() where tag == healthFilter.tag {
+                return index
             }
         }
         return nil

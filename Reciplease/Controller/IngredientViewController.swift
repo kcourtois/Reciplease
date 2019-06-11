@@ -11,13 +11,27 @@ import UIKit
 class IngredientViewController: UIViewController {
 
     private var recipes: [Recipe] = []
-    var tags: [String] = []
 
+    @IBOutlet weak var filtersLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if Preferences.filters.isEmpty {
+            filtersLabel.text = "Filters: None"
+        } else {
+            var text = "Filters: "
+            for (index, tag) in Preferences.filters.enumerated() {
+                if index == Preferences.filters.count-1 {
+                    text += tag+"."
+                } else {
+                    text += tag+", "
+                }
+            }
+            filtersLabel.text = text
+        }
     }
 
     @IBAction func addIngredient() {
@@ -49,7 +63,7 @@ class IngredientViewController: UIViewController {
         }
 
         //API Call to search recipes
-        RecipeService.shared.search(searchText: search, filters: tags) { (result, success) in
+        RecipeService.shared.search(searchText: search) { (result, success) in
             //end of api calls, dimiss loading alert
             alert.dismiss(animated: false) {
                 guard let res = result, success == .success else {
