@@ -26,13 +26,13 @@ class IngredientViewController: UIViewController {
             return
         }
         //Else add ingredient to the list
-        IngredientService.ingredients.append("- "+text)
+        Preferences.ingredients.append("- "+text)
         textField.text = ""
         tableView.reloadData()
     }
 
     @IBAction func clearIngredients() {
-        IngredientService.ingredients = []
+        Preferences.ingredients = []
         tableView.reloadData()
     }
 
@@ -41,7 +41,7 @@ class IngredientViewController: UIViewController {
         let alert = loadingAlert()
 
         var search = ""
-        for ingredient in IngredientService.ingredients {
+        for ingredient in Preferences.ingredients {
             //Remove "- " from ingredient text
             let index = ingredient.index(ingredient.endIndex, offsetBy: -ingredient.count+2)
             let substring = ingredient[index...]
@@ -64,9 +64,6 @@ class IngredientViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToFilters", let filtersVC = segue.destination as? FiltersViewController {
-            filtersVC.tags = tags
-        }
         if segue.identifier == "segueToRecipesList", let recipeListVC = segue.destination as? RecipeListViewController {
             recipeListVC.recipes = recipes
         }
@@ -80,13 +77,13 @@ extension IngredientViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return IngredientService.ingredients.count
+        return Preferences.ingredients.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath)
-        let ingredient = IngredientService.ingredients[indexPath.row]
+        let ingredient = Preferences.ingredients[indexPath.row]
 
         cell.textLabel?.text = ingredient
 

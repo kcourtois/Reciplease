@@ -20,10 +20,10 @@ class IngredientServiceTests: XCTestCase {
     }
 
     func testGivenEmptyUserdefaultsWhenAddingIngredientThenShouldUpdate() {
-        IngredientService.ingredients.append("Potatoe")
-        IngredientService.ingredients.append("Cheese")
+        Preferences.ingredients.append("Potatoe")
+        Preferences.ingredients.append("Cheese")
 
-        XCTAssertEqual(IngredientService.ingredients[0], "Potatoe")
-        XCTAssertEqual(IngredientService.ingredients[1], "Cheese")
+        XCTAssertEqual(Preferences.ingredients[0], "Potatoe")
+        XCTAssertEqual(Preferences.ingredients[1], "Cheese")
     }
 }

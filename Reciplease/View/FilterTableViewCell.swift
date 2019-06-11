@@ -17,8 +17,12 @@ class FilterTableViewCell: UITableViewCell {
     private var filter: HealthFilter?
 
     @IBAction func toggleSwitch() {
-        if let filter = filter {
-            filter.active = !filter.active
+        if let index = getFilterIndex() {
+            Preferences.filters.remove(at: index)
+        } else {
+            if let filter = filter {
+                Preferences.filters.append(filter.tag)
+            }
         }
     }
 
@@ -26,6 +30,21 @@ class FilterTableViewCell: UITableViewCell {
         self.filter = filter
         titleLabel.text = filter.title
         descriptionLabel.text = filter.description
-        cellSwitch.isOn = filter.active
+        if let _ = getFilterIndex() {
+            cellSwitch.isOn = true
+        } else {
+            cellSwitch.isOn = false
+        }
+    }
+
+    private func getFilterIndex() -> Int? {
+        if let healthFilter = filter {
+            for (index, tag) in Preferences.filters.enumerated() {
+                if tag == healthFilter.tag {
+                    return index
+                }
+            }
+        }
+        return nil
     }
 }

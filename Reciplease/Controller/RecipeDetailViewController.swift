@@ -58,14 +58,8 @@ class RecipeDetailViewController: UIViewController {
             image = #imageLiteral(resourceName: "whitestar")
         }
 
-        //create a new button
-        let button = UIButton(type: .custom)
-        button.setImage(image, for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
-        let barButton = UIBarButtonItem(customView: button)
-        //assign button to navigationbar
-        self.navigationItem.rightBarButtonItem = barButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem.menuButton(self, action: #selector(favoriteTapped),
+                                                                       image: image)
     }
 
     private func handleFavoriteStorage() {
@@ -106,4 +100,19 @@ extension RecipeDetailViewController: UITableViewDataSource {
         return cell
     }
 
+}
+
+extension UIBarButtonItem {
+    static func menuButton(_ target: Any?, action: Selector, image: UIImage) -> UIBarButtonItem {
+        let button = UIButton(type: .custom)
+        button.setImage(image, for: .normal)
+        button.addTarget(target, action: action, for: .touchUpInside)
+
+        let menuBarItem = UIBarButtonItem(customView: button)
+        menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 24).isActive = true
+
+        return menuBarItem
+    }
 }
