@@ -10,7 +10,7 @@ import UIKit
 
 class IngredientViewController: UIViewController {
 
-    private var recipes: [Recipe] = []
+    private let model = IngredientViewModel()
 
     @IBOutlet weak var filtersLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -18,20 +18,7 @@ class IngredientViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if Preferences.filters.isEmpty {
-            filtersLabel.text = "Filters: None"
-        } else {
-            var text = "Filters: "
-            for (index, tag) in Preferences.filters.enumerated() {
-                if index == Preferences.filters.count-1 {
-                    text += tag+"."
-                } else {
-                    text += tag+", "
-                }
-            }
-            filtersLabel.text = text
-        }
+        filtersLabel.text = model.getFilters()
     }
 
     @IBAction func addIngredient() {
@@ -39,47 +26,55 @@ class IngredientViewController: UIViewController {
         guard let text = textField.text, !text.isEmpty else {
             return
         }
-        //Else add ingredient to the list
-        Preferences.ingredients.append("- "+text)
+
+        model.addIngredient(ingredient: text)
+
         textField.text = ""
         tableView.reloadData()
     }
 
     @IBAction func clearIngredients() {
-        Preferences.ingredients = []
+        model.clearIngredients()
         tableView.reloadData()
     }
 
     @IBAction func searchRecipes() {
-        //shows a loading alert
         let alert = loadingAlert()
-
-        var search = ""
-        for ingredient in Preferences.ingredients {
-            //Remove "- " from ingredient text
-            let index = ingredient.index(ingredient.endIndex, offsetBy: -ingredient.count+2)
-            let substring = ingredient[index...]
-            search += " " + String(substring)
-        }
-
-        //API Call to search recipes
-        RecipeService.shared.search(searchText: search) { (result, success) in
-            //end of api calls, dimiss loading alert
-            alert.dismiss(animated: false) {
-                guard let res = result, success == .success else {
-                    self.presentAlert(title: "Error", message: "Couldn't handle your request. Try again later.")
-                    return
-                }
-
-                self.recipes = res
-                self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
-            }
-        }
+        model.searchRecipes(alert: alert)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipesList", let recipeListVC = segue.destination as? RecipeListViewController {
-            recipeListVC.recipes = recipes
+            recipeListVC.recipes = model.recipes
+        }
+    }
+}
+
+// MARK: - Notifications
+extension IngredientViewController {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSendTextAlert(_:)),
+                                               name: .didSendTextAlert, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSendPerformSegue(_:)),
+                                               name: .didSendPerformSegue, object: nil)
+    }
+
+    //Triggers on notification didSendLoadingAlert
+    @objc private func onDidSendTextAlert(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: String] {
+            for (_, message) in data {
+                presentAlert(title: "Error", message: message)
+            }
+        }
+    }
+
+    //Triggers on notification didSendLoadingAlert
+    @objc private func onDidSendPerformSegue(_ notification: Notification) {
+        if let data = notification.userInfo as? [String: String] {
+            for (_, _) in data {
+                self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
+            }
         }
     }
 }
