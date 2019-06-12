@@ -10,23 +10,27 @@ import Foundation
 import UIKit
 
 struct FiltersViewModel {
+    private let preferences: Preferences
     let filter: HealthFilter
     var active: Bool {
         return getFilterIndex() != nil
     }
 
+    init(filter: HealthFilter, preferences: Preferences) {
+        self.filter = filter
+        self.preferences = preferences
+    }
+
     func toggleSwitch() {
-        let pref = Preferences(defaults: .standard)
         if let index = getFilterIndex() {
-            pref.filters.remove(at: index)
+            preferences.filters.remove(at: index)
         } else {
-            pref.filters.append(filter.tag)
+            preferences.filters.append(filter.tag)
         }
     }
 
     private func getFilterIndex() -> Int? {
-        let pref = Preferences(defaults: .standard)
-        for (index, tag) in pref.filters.enumerated() where tag == filter.tag {
+        for (index, tag) in preferences.filters.enumerated() where tag == filter.tag {
             return index
         }
         return nil

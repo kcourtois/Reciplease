@@ -38,7 +38,8 @@ extension FiltersViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
 
-        cell.filterViewModel = FiltersViewModel(filter: filters[indexPath.row])
+        cell.filterViewModel = FiltersViewModel(filter: filters[indexPath.row],
+                                                preferences: Preferences(defaults: .standard))
 
         return cell
     }

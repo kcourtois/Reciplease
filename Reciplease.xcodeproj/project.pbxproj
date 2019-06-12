@@ -35,7 +35,7 @@
 		9EFDF449229ED07A0040A3A1 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDF43E229EAF600040A3A1 /* Reciplease.xcdatamodeld */; };
 		9EFED26F22AFDFA800688C58 /* IngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFED26E22AFDFA800688C58 /* IngredientViewModel.swift */; };
 		9EFED27122AFE51C00688C58 /* NotificationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFED27022AFE51C00688C58 /* NotificationStrings.swift */; };
-		9EFED27322AFFA3000688C58 /* IngredientModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFED27222AFFA3000688C58 /* IngredientModelTests.swift */; };
+		9EFED27322AFFA3000688C58 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFED27222AFFA3000688C58 /* ViewModelTests.swift */; };
 		9EFED27622B0FA4400688C58 /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFED27522B0FA4400688C58 /* FiltersViewModel.swift */; };
 		9EFED27822B13E0200688C58 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFED27722B13E0200688C58 /* TestExtensions.swift */; };
 		A8D200365347DF947B9D26C4 /* Pods_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF184AC4760949187CC6CFF /* Pods_RecipleaseTests.framework */; };
@@ -86,7 +86,7 @@
 		9EFDF447229EC85C0040A3A1 /* PersistentFavoriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentFavoriteTests.swift; sourceTree = "<group>"; };
 		9EFED26E22AFDFA800688C58 /* IngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewModel.swift; sourceTree = "<group>"; };
 		9EFED27022AFE51C00688C58 /* NotificationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStrings.swift; sourceTree = "<group>"; };
-		9EFED27222AFFA3000688C58 /* IngredientModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientModelTests.swift; sourceTree = "<group>"; };
+		9EFED27222AFFA3000688C58 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		9EFED27522B0FA4400688C58 /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
 		9EFED27722B13E0200688C58 /* TestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		E1240DDC659407FB922524F3 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 				9EFDF447229EC85C0040A3A1 /* PersistentFavoriteTests.swift */,
 				9E82A81822A1845E00B7234D /* IngredientServiceTests.swift */,
 				9E82A81A22A56C4300B7234D /* RecipeServiceTests.swift */,
-				9EFED27222AFFA3000688C58 /* IngredientModelTests.swift */,
+				9EFED27222AFFA3000688C58 /* ViewModelTests.swift */,
 				9EFED27722B13E0200688C58 /* TestExtensions.swift */,
 			);
 			path = RecipleaseTests;
@@ -454,7 +454,7 @@
 			files = (
 				9E82A81922A1845E00B7234D /* IngredientServiceTests.swift in Sources */,
 				9EFED27822B13E0200688C58 /* TestExtensions.swift in Sources */,
-				9EFED27322AFFA3000688C58 /* IngredientModelTests.swift in Sources */,
+				9EFED27322AFFA3000688C58 /* ViewModelTests.swift in Sources */,
 				9EFDF449229ED07A0040A3A1 /* Reciplease.xcdatamodeld in Sources */,
 				9E82A81B22A56C4300B7234D /* RecipeServiceTests.swift in Sources */,
 				9EFDF448229EC85C0040A3A1 /* PersistentFavoriteTests.swift in Sources */,
