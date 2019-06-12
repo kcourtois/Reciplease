@@ -11,19 +11,14 @@ import XCTest
 @testable import Reciplease
 
 class IngredientServiceTests: XCTestCase {
-    override func setUp() {
-        UserDefaults.standard.removeObject(forKey: "ingredients")
-    }
-
-    override func tearDown() {
-        UserDefaults.standard.removeObject(forKey: "ingredients")
-    }
-
     func testGivenEmptyUserdefaultsWhenAddingIngredientThenShouldUpdate() {
-        Preferences.ingredients.append("Potatoe")
-        Preferences.ingredients.append("Cheese")
 
-        XCTAssertEqual(Preferences.ingredients[0], "Potatoe")
-        XCTAssertEqual(Preferences.ingredients[1], "Cheese")
+        let preferences = Preferences(defaults: .makeClearedInstance())
+
+        preferences.ingredients.append("Potatoe")
+        preferences.ingredients.append("Cheese")
+
+        XCTAssertEqual(preferences.ingredients[0], "Potatoe")
+        XCTAssertEqual(preferences.ingredients[1], "Cheese")
     }
 }

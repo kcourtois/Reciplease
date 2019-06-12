@@ -11,14 +11,19 @@ import UIKit
 
 class IngredientViewModel {
     public var recipes: [Recipe] = []
+    private var preferences: Preferences
+
+    init(preferences: Preferences) {
+        self.preferences = preferences
+    }
 
     public func getFilters() -> String {
-        if Preferences.filters.isEmpty {
-            return "Filters: None"
+        if preferences.filters.isEmpty {
+            return "Filters: None."
         } else {
             var text = "Filters: "
-            for (index, tag) in Preferences.filters.enumerated() {
-                if index == Preferences.filters.count-1 {
+            for (index, tag) in preferences.filters.enumerated() {
+                if index == preferences.filters.count-1 {
                     text += tag+"."
                 } else {
                     text += tag+", "
@@ -28,18 +33,9 @@ class IngredientViewModel {
         }
     }
 
-    public func addIngredient(ingredient: String) {
-        //Else add ingredient to the list
-        Preferences.ingredients.append("- "+ingredient)
-    }
-
-    public func clearIngredients() {
-        Preferences.ingredients = []
-    }
-
     public func searchRecipes(alert: UIAlertController) {
         var search = ""
-        for ingredient in Preferences.ingredients {
+        for ingredient in preferences.ingredients {
             //Remove "- " from ingredient text
             let index = ingredient.index(ingredient.endIndex, offsetBy: -ingredient.count+2)
             let substring = ingredient[index...]

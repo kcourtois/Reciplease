@@ -15,27 +15,33 @@ class Preferences {
         static let filters = "filters"
     }
 
-    static var ingredients: [String] {
+    private let defaults: UserDefaults
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+    }
+
+    public var ingredients: [String] {
         get {
-            guard let res = UserDefaults.standard.object(forKey: Keys.ingredients) as? [String] else {
+            guard let res = defaults.object(forKey: Keys.ingredients) as? [String] else {
                 return []
             }
             return res
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.ingredients)
+            defaults.set(newValue, forKey: Keys.ingredients)
         }
     }
 
-    static var filters: [String] {
+    public var filters: [String] {
         get {
-            guard let res = UserDefaults.standard.object(forKey: Keys.filters) as? [String] else {
+            guard let res = defaults.object(forKey: Keys.filters) as? [String] else {
                 return []
             }
             return res
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.filters)
+            defaults.set(newValue, forKey: Keys.filters)
         }
     }
 }

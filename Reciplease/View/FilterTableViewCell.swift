@@ -14,35 +14,20 @@ class FilterTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cellSwitch: UISwitch!
 
-    private var filter: HealthFilter?
+    var filterViewModel: FiltersViewModel? {
+        didSet {
+            if let fvm = filterViewModel {
+                titleLabel.text = fvm.filter.title
+                descriptionLabel.text = fvm.filter.description
+                cellSwitch.isOn = fvm.active
+            }
+        }
+    }
 
     @IBAction func toggleSwitch() {
-        if let index = getFilterIndex() {
-            Preferences.filters.remove(at: index)
-        } else {
-            if let filter = filter {
-                Preferences.filters.append(filter.tag)
-            }
+        if let fvm = filterViewModel {
+            fvm.toggleSwitch()
+            cellSwitch.isOn = fvm.active
         }
-    }
-
-    func configure(filter: HealthFilter) {
-        self.filter = filter
-        titleLabel.text = filter.title
-        descriptionLabel.text = filter.description
-        if getFilterIndex() != nil {
-            cellSwitch.isOn = true
-        } else {
-            cellSwitch.isOn = false
-        }
-    }
-
-    private func getFilterIndex() -> Int? {
-        if let healthFilter = filter {
-            for (index, tag) in Preferences.filters.enumerated() where tag == healthFilter.tag {
-                return index
-            }
-        }
-        return nil
     }
 }

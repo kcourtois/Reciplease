@@ -9,13 +9,6 @@
 import XCTest
 @testable import Reciplease
 class RecipeServiceTests: XCTestCase {
-    override func setUp() {
-        UserDefaults.standard.removeObject(forKey: "filters")
-    }
-
-    override func tearDown() {
-        UserDefaults.standard.removeObject(forKey: "filters")
-    }
 
     func testGivenResearchWhenCallingSearchWithoutFiltersShouldHaveResultAndNoError() {
         let expec = expectation(description: "Alamofire")
@@ -32,9 +25,11 @@ class RecipeServiceTests: XCTestCase {
     func testGivenResearchWhenCallingSearchWithFiltersShouldHaveResultAndNoError() {
         let expec = expectation(description: "Alamofire")
         let list = HealthFilter.getList()
+        let preferences = Preferences(defaults: .makeClearedInstance())
+
         XCTAssertEqual(list.count, 6)
-        Preferences.filters.append(list[0].tag)
-        Preferences.filters.append(list[1].tag)
+        preferences.filters.append(list[0].tag)
+        preferences.filters.append(list[1].tag)
 
         RecipeService.shared.search(searchText: "mozzarella goat cheese") { (result, error) in
             XCTAssertEqual(error, .success)

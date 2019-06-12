@@ -20,12 +20,12 @@ class RecipeService {
     private init() {}
 
     func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
-
+        let pref = Preferences(defaults: .standard)
         let urlToSearch =
             "http://api.edamam.com/search?q=\(searchText)" +
             "&app_id=\(ApiKeys.edamamAppId)&" +
             "app_key=\(ApiKeys.edamamKey)" +
-            addFilters(filters: Preferences.filters)
+            addFilters(filters: pref.filters)
 
         guard let urlString = urlToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return completionHandler(nil, .failure)

@@ -10,7 +10,8 @@ import UIKit
 
 class IngredientViewController: UIViewController {
 
-    private let model = IngredientViewModel()
+    private let preferences = Preferences(defaults: .standard)
+    private var model: IngredientViewModel?
 
     @IBOutlet weak var filtersLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +19,10 @@ class IngredientViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        filtersLabel.text = model.getFilters()
+        model = IngredientViewModel(preferences: preferences)
+        if let model = model {
+            filtersLabel.text = model.getFilters()
+        }
     }
 
     @IBAction func addIngredient() {
@@ -27,25 +31,34 @@ class IngredientViewController: UIViewController {
             return
         }
 
-        model.addIngredient(ingredient: text)
-
+        preferences.ingredients.append("- "+text)
         textField.text = ""
         tableView.reloadData()
     }
 
     @IBAction func clearIngredients() {
-        model.clearIngredients()
+        preferences.ingredients = []
         tableView.reloadData()
     }
 
     @IBAction func searchRecipes() {
         let alert = loadingAlert()
-        model.searchRecipes(alert: alert)
+        if let model = model {
+            model.searchRecipes(alert: alert)
+        } else {
+            alert.dismiss(animated: true) {
+                self.presentAlert(title: "Error", message: "An error occured, please try again.")
+            }
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipesList", let recipeListVC = segue.destination as? RecipeListViewController {
-            recipeListVC.recipes = model.recipes
+            if let model = model {
+                recipeListVC.recipes = model.recipes
+            } else {
+                recipeListVC.recipes = []
+            }
         }
     }
 }
@@ -86,13 +99,13 @@ extension IngredientViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Preferences.ingredients.count
+        return preferences.ingredients.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath)
-        let ingredient = Preferences.ingredients[indexPath.row]
+        let ingredient = preferences.ingredients[indexPath.row]
 
         cell.textLabel?.text = ingredient
 
