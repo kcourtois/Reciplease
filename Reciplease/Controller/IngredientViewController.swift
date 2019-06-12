@@ -65,8 +65,8 @@ class IngredientViewController: UIViewController {
 
 // MARK: - Notifications
 extension IngredientViewController {
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSendTextAlert(_:)),
                                                name: .didSendTextAlert, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidSendPerformSegue(_:)),
@@ -84,11 +84,7 @@ extension IngredientViewController {
 
     //Triggers on notification didSendLoadingAlert
     @objc private func onDidSendPerformSegue(_ notification: Notification) {
-        if let data = notification.userInfo as? [String: String] {
-            for (_, _) in data {
-                self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
-            }
-        }
+        self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
     }
 }
 

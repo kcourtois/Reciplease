@@ -58,8 +58,7 @@ class IngredientViewModel {
     }
 
     private func postPerformSegue() {
-        NotificationCenter.default.post(name: .didSendPerformSegue, object: nil,
-                                        userInfo: [NotificationStrings.didSendPerformSegueParameterKey: ""])
+        NotificationCenter.default.post(Notification(name: .didSendPerformSegue))
     }
 
     private func postErrorAlert(message: String) {
