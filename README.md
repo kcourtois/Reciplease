@@ -8,35 +8,35 @@ App that finds recipes for you for given ingredients
 # Ingredients list
 Here, you can add all the ingredients that you have and want to cook with.
 
-<img src="Img/ingredients.png" />
+<img src="Img/ingredients.png" width="50%" height="50%"/>
 
 # Filters
 You can specify filters to exclude recipes. There are 6 filters available for now on. These filters will be stored, so you don't have to specify them each time you are looking for a recipe.
 
-<img src="Img/filters.png" />
+<img src="Img/filters.png" width="50%" height="50%"/>
 
 # Search
 When you tap the search button, a list of recipes matching your criterias is shown.
 
-<img src="Img/search.png">
+<img src="Img/search.png" width="50%" height="50%"/>
 
 # Detail
 You can then tap a recipe to see the ingredients required, and get the link to the full recipe.
 
-<img src="Img/detailRecipe.png" />
+<img src="Img/detailRecipe.png" width="50%" height="50%"/>
 
 # Favorite
 You can then tap the star to add or remove a recipe from your favorites.
 
-<img src="Img/addToFav.png" />
+<img src="Img/addToFav.png" width="50%" height="50%"/>
 
 # Get directions
 The button "Get Directions" will get you to the full recipe, through your browser.
 
-<img src="Img/search.png" />
+<img src="Img/search.png" width="50%" height="50%"/>
 
 # Favorite list
 At any time, you can see all the recipes in your favorites by clicking the tab bar.
 
-<img src="Img/favList.png" />
+<img src="Img/favList.png" width="50%" height="50%"/>
 

@@ -16,10 +16,6 @@ class FiltersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    @IBAction func dismissFilters(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 // MARK: - Tableview

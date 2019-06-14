@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct FiltersViewModel {
     private let preferences: Preferences

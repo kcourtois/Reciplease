@@ -211,16 +211,16 @@
             </objects>
             <point key="canvasLocation" x="2181" y="-457"/>
         </scene>
-        <!--Filters View Controller-->
+        <!--Reciplease-->
         <scene sceneID="Fe1-Ga-7cm">
             <objects>
-                <viewController id="HIu-u0-RB2" customClass="FiltersViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Reciplease" id="HIu-u0-RB2" customClass="FiltersViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t52-AS-3sF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="axb-Wx-8yM">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" rowHeight="77" id="cEW-7e-Vaa" customClass="FilterTableViewCell" customModule="Reciplease" customModuleProvider="target">
@@ -273,34 +273,13 @@
                                     <outlet property="dataSource" destination="HIu-u0-RB2" id="IIs-Ch-ycF"/>
                                 </connections>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8X-bk-XPE">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="barTintColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Filters" id="Wmh-qN-S3k">
-                                        <barButtonItem key="leftBarButtonItem" title="X" id="Zfe-cd-NSf">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <action selector="dismissFilters:" destination="HIu-u0-RB2" id="yfy-4W-Gbe"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.21176470589999999" green="0.20000000000000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="j8X-bk-XPE" firstAttribute="trailing" secondItem="eRm-8d-5ZX" secondAttribute="trailing" id="3Yf-uM-01U"/>
-                            <constraint firstItem="j8X-bk-XPE" firstAttribute="top" secondItem="eRm-8d-5ZX" secondAttribute="top" id="4eK-44-tM0"/>
-                            <constraint firstItem="axb-Wx-8yM" firstAttribute="top" secondItem="j8X-bk-XPE" secondAttribute="bottom" id="Aqa-t3-a6r"/>
+                            <constraint firstItem="axb-Wx-8yM" firstAttribute="top" secondItem="eRm-8d-5ZX" secondAttribute="top" id="34R-vT-OxP"/>
                             <constraint firstItem="axb-Wx-8yM" firstAttribute="leading" secondItem="eRm-8d-5ZX" secondAttribute="leading" id="ETC-PF-NaE"/>
                             <constraint firstItem="eRm-8d-5ZX" firstAttribute="bottom" secondItem="axb-Wx-8yM" secondAttribute="bottom" id="Lgt-Fr-Nmb"/>
                             <constraint firstItem="eRm-8d-5ZX" firstAttribute="trailing" secondItem="axb-Wx-8yM" secondAttribute="trailing" id="ahS-q7-Uly"/>
-                            <constraint firstItem="j8X-bk-XPE" firstAttribute="leading" secondItem="eRm-8d-5ZX" secondAttribute="leading" id="vHL-LW-QEy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eRm-8d-5ZX"/>
                     </view>
@@ -451,7 +430,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="HIu-u0-RB2" kind="presentation" identifier="segueToFilters" id="jiP-gW-Ae7"/>
+                                    <segue destination="HIu-u0-RB2" kind="show" identifier="segueToFilters" id="jiP-gW-Ae7"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filters:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsl-PN-lM3">
