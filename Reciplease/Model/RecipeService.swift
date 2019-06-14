@@ -19,13 +19,13 @@ class RecipeService {
     static var shared = RecipeService()
     private init() {}
 
-    func search(searchText: String, completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
-        let pref = Preferences(defaults: .standard)
+    func search(preferences: Preferences, searchText: String,
+                completionHandler: @escaping ([Recipe]?, NetworkError) -> Void) {
         let urlToSearch =
             "http://api.edamam.com/search?q=\(searchText)" +
             "&app_id=\(ApiKeys.edamamAppId)&" +
             "app_key=\(ApiKeys.edamamKey)" +
-            addFilters(filters: pref.filters)
+            addFilters(filters: preferences.filters)
 
         guard let urlString = urlToSearch.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return completionHandler(nil, .failure)
@@ -38,6 +38,11 @@ class RecipeService {
             }
 
             var recipes: [Recipe] = []
+
+            guard !arr.isEmpty else {
+                completionHandler([], .success)
+                return
+            }
 
             for (index, hit) in arr.enumerated() {
                 let recipeJSON = hit["recipe"]

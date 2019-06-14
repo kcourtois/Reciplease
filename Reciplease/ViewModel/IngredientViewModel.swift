@@ -43,7 +43,7 @@ class IngredientViewModel {
         }
 
         //API Call to search recipes
-        RecipeService.shared.search(searchText: search) { (result, success) in
+        RecipeService.shared.search(preferences: preferences, searchText: search) { (result, success) in
             //end of api calls, dimiss loading alert
             alert.dismiss(animated: false) {
                 guard let res = result, success == .success else {
