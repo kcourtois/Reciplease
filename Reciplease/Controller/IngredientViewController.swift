@@ -12,6 +12,7 @@ class IngredientViewController: UIViewController {
 
     private let preferences = Preferences(defaults: .standard)
     private var model: IngredientViewModel?
+    private var alert: UIAlertController?
 
     @IBOutlet weak var filtersLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -42,12 +43,14 @@ class IngredientViewController: UIViewController {
     }
 
     @IBAction func searchRecipes() {
-        let alert = loadingAlert()
+        alert = loadingAlert()
         if let model = model {
-            model.searchRecipes(alert: alert)
+            model.searchRecipes()
         } else {
-            alert.dismiss(animated: true) {
-                self.presentAlert(title: "Error", message: "An error occured, please try again.")
+            if let alert = alert {
+                alert.dismiss(animated: true) {
+                    self.presentAlert(title: "Error", message: "An error occured, please try again.")
+                }
             }
         }
     }
@@ -75,16 +78,26 @@ extension IngredientViewController {
 
     //Triggers on notification didSendLoadingAlert
     @objc private func onDidSendTextAlert(_ notification: Notification) {
-        if let data = notification.userInfo as? [String: String] {
-            for (_, message) in data {
-                presentAlert(title: "Error", message: message)
+        if let alert = alert {
+            alert.dismiss(animated: true) {
+                if let data = notification.userInfo as? [String: String] {
+                    for (_, message) in data {
+                        self.presentAlert(title: "Error", message: message)
+                    }
+                }
             }
         }
     }
 
     //Triggers on notification didSendLoadingAlert
     @objc private func onDidSendPerformSegue(_ notification: Notification) {
-        self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
+        guard let alert = alert else {
+            self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
+            return
+        }
+        alert.dismiss(animated: true) {
+            self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
+        }
     }
 }
 

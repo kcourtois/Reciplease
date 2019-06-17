@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class IngredientViewModel {
     public var recipes: [Recipe] = []
@@ -33,7 +32,20 @@ class IngredientViewModel {
         }
     }
 
-    public func searchRecipes(alert: UIAlertController) {
+    public func searchRecipes() {
+        //API Call to search recipes
+        RecipeService.shared.search(preferences: preferences, searchText: createSearchString()) { (result, success) in
+            guard let res = result, success == .success else {
+                self.postErrorAlert(message: "Couldn't handle your request. Try again later.")
+                return
+            }
+
+            self.recipes = res
+            self.postPerformSegue()
+        }
+    }
+
+    private func createSearchString() -> String {
         var search = ""
         for ingredient in preferences.ingredients {
             //Remove "- " from ingredient text
@@ -41,20 +53,7 @@ class IngredientViewModel {
             let substring = ingredient[index...]
             search += " " + String(substring)
         }
-
-        //API Call to search recipes
-        RecipeService.shared.search(preferences: preferences, searchText: search) { (result, success) in
-            //end of api calls, dimiss loading alert
-            alert.dismiss(animated: false) {
-                guard let res = result, success == .success else {
-                    self.postErrorAlert(message: "Couldn't handle your request. Try again later.")
-                    return
-                }
-
-                self.recipes = res
-                self.postPerformSegue()
-            }
-        }
+        return search.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func postPerformSegue() {

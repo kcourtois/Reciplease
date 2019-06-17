@@ -8,6 +8,7 @@
 
 import XCTest
 import Foundation
+import Mockingjay
 @testable import Reciplease
 
 class IngredientViewModelTests: XCTestCase {
@@ -29,6 +30,29 @@ class IngredientViewModelTests: XCTestCase {
         preferences.filters.append(HealthFilter.getList()[0].tag)
         preferences.filters.append(HealthFilter.getList()[5].tag)
         XCTAssertEqual(model.getFilters(), "Filters: alcohol-free, vegetarian.")
+    }
+
+    func testGivenIngredientsWhenCallingSearchThenFillsRecipes() {
+        let testExpectation = expectation(description: "Did finish operation expectation")
+        let url = Bundle(for: type(of: self)).url(forResource: "NoFilters", withExtension: "json")!
+        // swiftlint:disable:next force_try
+        let data = try! Data(contentsOf: url)
+        stub(MockingjayFilters.matcherNoFilters, jsonData(data))
+        stub(MockingjayFilters.matcherImages, jsonData(UIColor.green.image().pngData()!))
+        preferences.ingredients.append("- mozzarella")
+        preferences.ingredients.append("- goat cheese")
+
+        let handler = { (notification: Notification) -> Void in
+            testExpectation.fulfill()
+        }
+
+        // swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: .didSendPerformSegue, object: nil, queue: nil, using: handler)
+
+        model.searchRecipes()
+        waitForExpectations(timeout: 10, handler: nil)
+
+        XCTAssertFalse(model.recipes.isEmpty)
     }
 }
 
